@@ -4,7 +4,15 @@
   "description": "ts-on-node",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "tsc -w",
+    "prebuild": "rimraf dist",
+    "build": "npm-run-all --parallel lint:fix test:no-coverage compile",
+    "compile": "tsc",
+    "lint:fix": "eslint --ext .ts --fix src/",
+    "test:no-coverage": "jest --no-coverage",
+    "postbuild": "rm ./dist/*.test.js* && echo \"build successful!!\"",
+    "test": "jest",
+    "test:dev": "jest --watch --no-coverage"
   },
   "repository": {
     "type": "git",
@@ -12,9 +20,40 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/aclearworld/ts-on-node/issues"
   },
-  "homepage": "https://github.com/aclearworld/ts-on-node#readme"
+  "homepage": "https://github.com/aclearworld/ts-on-node#readme",
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-typescript": "^7.8.3",
+    "@types/jest": "^25.1.1",
+    "@types/node": "^13.7.0",
+    "@typescript-eslint/eslint-plugin": "^2.19.0",
+    "@typescript-eslint/parser": "^2.19.0",
+    "babel-jest": "^25.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jest": "^23.6.0",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-prefer-arrow": "^1.1.7",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "husky": "^4.2.1",
+    "jest": "^25.1.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.19.1",
+    "rimraf": "^3.0.1",
+    "typescript": "^3.7.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run build"
+    }
+  }
 }
