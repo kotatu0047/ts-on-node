@@ -4,15 +4,15 @@
   "description": "ts-on-node",
   "main": "index.js",
   "scripts": {
-    "start": "tsc -w",
+    "start": "node ./dist/index.js",
+    "watch": "tsc-watch --onSuccess \"npm run start\"",
     "prebuild": "rimraf dist",
-    "build": "npm-run-all --parallel lint:fix test:no-coverage compile",
+    "build": "npm-run-all --parallel lint:fix test compile",
     "compile": "tsc",
     "lint:fix": "eslint --ext .ts --fix src/",
-    "test:no-coverage": "jest --no-coverage",
-    "postbuild": "rm ./dist/*.test.js* && echo \"build successful!!\"",
+    "postbuild": "rm ./dist/**/*.test.js* && echo \"build successful!!\"",
     "test": "jest",
-    "test:dev": "jest --watch --no-coverage"
+    "test:watch": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -30,7 +30,7 @@
     "@babel/preset-env": "^7.8.4",
     "@babel/preset-typescript": "^7.8.3",
     "@types/jest": "^25.1.1",
-    "@types/node": "^13.7.0",
+    "@types/node": "^13.7.7",
     "@typescript-eslint/eslint-plugin": "^2.19.0",
     "@typescript-eslint/parser": "^2.19.0",
     "babel-jest": "^25.1.0",
@@ -44,11 +44,12 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "husky": "^4.2.1",
+    "husky": "^4.2.3",
     "jest": "^25.1.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.19.1",
     "rimraf": "^3.0.1",
+    "tsc-watch": "^4.1.0",
     "typescript": "^3.7.5"
   },
   "husky": {
