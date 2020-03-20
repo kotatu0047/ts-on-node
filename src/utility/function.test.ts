@@ -47,7 +47,7 @@ describe('Functional utils', () => {
 
   test('asyncPipe make composed 5 functions', () => {
     const fn1 = async (val: number) => val + 1
-    const fn2 = (val: number) => val + ''
+    const fn2 = (val: number) => `${val}`
     const fn3 = (val: string) => !!val
     const fn4 = async (val: boolean) => () => Number(val)
     const fn5 = (val: () => number) => val() + 1
